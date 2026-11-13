@@ -1,3 +1,4 @@
+from pathlib import Path
 import pandas as pd, numpy as np
 import plotly.express as px
 import streamlit as st
@@ -7,7 +8,7 @@ st.set_page_config(page_title="Palo Alto Networks | Engagement & Burnout", page_
 # ---------- Data + feature engineering (same logic as the notebook) ----------
 @st.cache_data
 def load():
-    df = pd.read_csv("Palo Alto Networks.csv")
+    df = pd.read_csv(Path(__file__).parent / "Palo_Alto_Networks.csv")
     eng = ["JobInvolvement", "JobSatisfaction", "EnvironmentSatisfaction", "RelationshipSatisfaction"]
     z = (df[eng] - df[eng].mean()) / df[eng].std()
     s = z.mean(axis=1)
